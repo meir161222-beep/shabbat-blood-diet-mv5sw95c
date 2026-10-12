@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#2E7D32</color>
+    <color name="primary_dark">#1B5E20</color>
+    <color name="primary_light">#E8F5E9</color>
+    <color name="accent_gold">#FF8F00</color>
+    <color name="accent_gold_light">#FFF8E1</color>
+    <color name="bg_screen">#F5F7FA</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#666666</color>
+    <color name="text_muted">#9E9E9E</color>
+    <color name="border">#E0E0E0</color>
+    <color name="status_beneficial">#2E7D32</color>
+    <color name="status_neutral">#1565C0</color>
+    <color name="status_avoid">#C62828</color>
+    <color name="badge_beneficial_bg">#E8F5E9</color>
+    <color name="badge_neutral_bg">#E3F2FD</color>
+    <color name="badge_avoid_bg">#FFEBEE</color>
+</resources>

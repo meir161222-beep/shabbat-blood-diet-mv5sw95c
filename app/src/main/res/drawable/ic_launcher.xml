@@ -1,0 +1,25 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Rounded Background -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M16,0 L80,0 A16,16 0 0,1 96,16 L96,80 A16,16 0 0,1 80,96 L16,96 A16,16 0 0,1 0,80 L0,16 A16,16 0 0,1 16,0 Z" />
+
+    <!-- Healthy Leaf Shape -->
+    <path
+        android:fillColor="#81C784"
+        android:pathData="M48,16 C30,28 24,52 36,70 C42,79 56,80 62,72 C74,56 72,28 48,16 Z" />
+
+    <!-- Leaf Vein & Blood Drop Complement in Warm Amber -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M48,28 C45,36 38,50 43,62 C45,66 49,67 52,64 C56,58 56,42 48,28 Z" />
+
+    <!-- Shabbat Candle / Drop Accent -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M48,44 C44,48 43,53 45,57 C47,60 51,60 53,57 C55,53 52,48 48,44 Z" />
+</vector>

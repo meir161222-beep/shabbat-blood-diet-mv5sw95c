@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F7FA">
+
+    <!-- Top App Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2E7D32"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingTop="14dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="14dp">
+
+        <TextView
+            android:id="@+id/tvAppTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="תזונה מותאמת ושבת שלום"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tvActiveBloodAndDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="סוג דם: O | יום חול"
+            android:textColor="#E8F5E9"
+            android:textSize="13sp"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <!-- Motivational Quotes Strip -->
+    <LinearLayout
+        android:id="@+id/cardQuote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/bg_quote_card"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="💡 "
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvEncouragementQuote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="הגוף הוא משכן הנפש - כל צעד קטן שאתה עושה היום מקדם אותך לבריאות שלמה!"
+            android:textColor="#1B5E20"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnNextQuote"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/btn_primary"
+            android:text="עידוד חדש"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp" />
+    </LinearLayout>
+
+    <!-- Navigation Tabs -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layout_marginTop="6dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="2dp"
+            android:paddingBottom="4dp">
+
+            <Button
+                android:id="@+id/tabTracker"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/tab_btn_selected"
+                android:text="יומן קלוריות"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp" />
+
+            <Button
+                android:id="@+id/tabBloodType"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/tab_btn_unselected"
+                android:text="סוג דם ומאכלים"
+                android:textColor="#333333"
+                android:textSize="12sp"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp" />
+
+            <Button
+                android:id="@+id/tabShabbat"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/tab_btn_unselected"
+                android:text="מצב שבת קודש"
+                android:textColor="#333333"
+                android:textSize="12sp"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp" />
+
+            <Button
+                android:id="@+id/tabSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:background="@drawable/tab_btn_unselected"
+                android:text="הגדרות ויעדים"
+                android:textColor="#333333"
+                android:textSize="12sp"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Frame for Tab Contents -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- TAB 1: DIARY / TRACKER -->
+        <ScrollView
+            android:id="@+id/viewTracker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:padding="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Mode Indicator / Toggle -->
+                <LinearLayout
+                    android:id="@+id/bannerDayMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card"
+                    android:padding="12dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tvCurrentModeIndicator"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="מצב יום: יום חול רגיל"
+                        android:textColor="#2E7D32"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <Switch
+                        android:id="@+id/switchShabbatMode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="שבת / חג"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <!-- Calorie Summary Card -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="מאזן קלוריות יומי"
+                        android:textColor="#212121"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="נאכלו"
+                                android:textColor="#666666"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/tvCaloriesConsumed"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#2E7D32"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="קק״ל"
+                                android:textColor="#888888"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="יעד יומי"
+                                android:textColor="#666666"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/tvCaloriesTarget"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1800"
+                                android:textColor="#1976D2"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="קק״ל"
+                                android:textColor="#888888"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="נותרו"
+                                android:textColor="#666666"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/tvCaloriesRemaining"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1800"
+                                android:textColor="#D32F2F"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="קק״ל"
+                                android:textColor="#888888"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/progressCalories"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="14dp"
+                        android:max="100"
+                        android:progress="0" />
+                </LinearLayout>
+
+                <!-- Quick Add Food Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="הוספת מאכל ליומן"
+                        android:textColor="#212121"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="בחר מאכל מרשימת סוג הדם או הזן עצמאית:"
+                        android:textColor="#757575"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/etCustomFoodName"
+                            android:layout_width="0dp"
+                            android:layout_height="42dp"
+                            android:layout_weight="2"
+                            android:background="@drawable/bg_input"
+                            android:hint="שם המאכל"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/etCustomFoodCalories"
+                            android:layout_width="0dp"
+                            android:layout_height="42dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_input"
+                            android:hint="קלוריות"
+                            android:inputType="number"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
+                            android:textSize="14sp" />
+
+                        <Button
+                            android:id="@+id/btnAddCustomFood"
+                            android:layout_width="wrap_content"
+                            android:layout_height="42dp"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/btn_primary"
+                            android:text="הוסף"
+                            android:textColor="#FFFFFF"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnQuickPickFromBloodList"
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/btn_gold"
+                        android:text="➕ בחר מתוך מאכלי סוג הדם והשבת"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <!-- List of Logged Foods Today -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="ארוחות שנרשמו היום"
+                            android:textColor="#212121"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/btnClearDailyLog"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:background="@null"
+                            android:text="אפס יום"
+                            android:textColor="#D32F2F"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/containerLoggedFoods"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="6dp" />
+
+                    <TextView
+                        android:id="@+id/tvEmptyLogNotice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:text="עדיין לא נרשמו מאכלים היום. יום מוצלח לפניך!"
+                        android:textColor="#9E9E9E"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- TAB 2: BLOOD TYPE NUTRITION GUIDE -->
+        <LinearLayout
+            android:id="@+id/viewBloodType"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <!-- Filter Controls -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_card"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/tvBloodGuideHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="התאמת מזונות לסוג דם O"
+                    android:textColor="#2E7D32"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvBloodGuideSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="ירוק: מועיל ומבריא | כחול: ניטרלי | אדום: מומלץ להימנע"
+                    android:textColor="#666666"
+                    android:textSize="12sp" />
+
+                <!-- Search box -->
+                <EditText
+                    android:id="@+id/etSearchFood"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_input"
+                    android:hint="חיפוש מאכל..."
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="13sp" />
+
+                <!-- Filter Chips -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnFilterAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:layout_marginEnd="6dp"
+                            android:background="@drawable/btn_primary"
+                            android:text="הכל"
+                            android:textColor="#FFFFFF"
+                            android:textSize="11sp" />
+
+                        <Button
+                            android:id="@+id/btnFilterBeneficial"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:layout_marginEnd="6dp"
+                            android:background="@drawable/tab_btn_unselected"
+                            android:text="מועיל מאוד"
+                            android:textColor="#2E7D32"
+                            android:textSize="11sp" />
+
+                        <Button
+                            android:id="@+id/btnFilterNeutral"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:layout_marginEnd="6dp"
+                            android:background="@drawable/tab_btn_unselected"
+                            android:text="ניטרלי"
+                            android:textColor="#1565C0"
+                            android:textSize="11sp" />
+
+                        <Button
+                            android:id="@+id/btnFilterAvoid"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:layout_marginEnd="6dp"
+                            android:background="@drawable/tab_btn_unselected"
+                            android:text="להימנע"
+                            android:textColor="#C62828"
+                            android:textSize="11sp" />
+
+                        <Button
+                            android:id="@+id/btnFilterShabbatFoods"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:background="@drawable/tab_btn_unselected"
+                            android:text="מאכלי שבת"
+                            android:textColor="#FF8F00"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+
+            <!-- Food Items Scroll List -->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:id="@+id/containerFoodList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </ScrollView>
+        </LinearLayout>
+
+        <!-- TAB 3: SHABBAT COMPANION -->
+        <ScrollView
+            android:id="@+id/viewShabbat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:padding="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Shabbat Header Box -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_shabbat_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="🕯️ עונג שבת ברוגע ובבריאות"
+                        android:textColor="#E65100"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:lineSpacingExtra="3dp"
+                        android:text="בשבת קודש אנחנו מכבדים את השבת במאכלים טעימים, אך קל להרגיש כבדות. התוכנית מאפשרת תקציב קלורי מוגדל לשבת (בנק קלוריות שבת) לצד הדרכה מעשית לאכילה רגועה ומודעת."
+                        android:textColor="#5D4037"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <!-- Meal Distribution Calculator -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="חלוקת קלוריות מומלצת לסעודות שבת"
+                        android:textColor="#212121"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <!-- Meal 1: Leil Shabbat -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="#F9FBE7"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/tvMeal1Budget"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="סעודת ליל שבת (~900 קק״ל)"
+                            android:textColor="#33691E"
+                            android:textStyle="bold"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="קידוש (יין/מיץ ענבים), חלה במידה, דגים, מרק עוף עשיר. העדיפו סלטים חיים טריים ללא מיונז."
+                            android:textColor="#555555"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <!-- Meal 2: Yom Shabbat -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="#FFF8E1"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/tvMeal2Budget"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="סעודת יום שבת - חמין וסעודה (~950 קק״ל)"
+                            android:textColor="#E65100"
+                            android:textStyle="bold"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="חמין / צ'ולנט: שימו דגש על נתחי בשר רזים, קטניות וביצה קשה. אכלו לאט כדי לחוש שובע נעים."
+                            android:textColor="#555555"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <!-- Meal 3: Seuda Shlishit -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="#E1F5FE"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/tvMeal3Budget"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="סעודה שלישית קלה (~450 קק״ל)"
+                            android:textColor="#0277BD"
+                            android:textStyle="bold"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="פת שחרית/חלה קלה, טונה/סלמון, גבינות רזות או ירקות חתוכים, פרי לעיכול קל לפני תחילת השבוע."
+                            android:textColor="#555555"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Calorie Bank Strategy -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="כיצד עובד 'בנק הקלוריות לשבת'?"
+                        android:textColor="#212121"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:lineSpacingExtra="3dp"
+                        android:text="במקום להרגיש אשמה, האפליקציה מאפשרת לך לחסוך 100-150 קלוריות מיום ראשון עד חמישי. סכום זה מצטבר לכ-600 קלוריות בונוס לשבת שנוספות ליעד שלך, כך שתוכל ליהנות מכבוד השבת ללא נקיפות מצפון!"
+                        android:textColor="#555555"
+                        android:textSize="13sp" />
+
+                    <Button
+                        android:id="@+id/btnApplyShabbatToday"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/btn_gold"
+                        android:text="הפעל יעד שבת להיום (+500 קק״ל)"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <!-- Mindful Eating Tips for Shabbat -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="טיפים של זהב לשמירה על רוגע בשולחן שבת"
+                        android:textColor="#212121"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:lineSpacingExtra="4dp"
+                        android:text="1. שתיית 2 כוסות מים לפני הקידוש מסייעת לתחושת רוגע ושובע.\n2. אכילת 'כזית' חלה בנחת, תוך לעיסה איטית ודברי תורה בין מנה למנה.\n3. מלאו את מחצית הצלחת בסלטים חיים וירקות מבושלים לפני המנות העיקריות.\n4. קחו הפסקה של 10 דקות לפני הקינוח – לרוב תגלו שאתם כבר שבעים ומרוצים."
+                        android:textColor="#424242"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- TAB 4: SETTINGS & GOALS -->
+        <ScrollView
+            android:id="@+id/viewSettings"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:padding="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="הגדרות פרופיל ותזונה"
+                        android:textColor="#212121"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!-- Blood Type Selector -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="בחר את סוג הדם שלך:"
+                        android:textColor="#424242"
+                        android:textSize="13sp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerBloodType"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/bg_input"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp" />
+
+                    <!-- Daily Weekday Target -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="יעד קלוריות יומי (ימי חול):"
+                        android:textColor="#424242"
+                        android:textSize="13sp" />
+
+                    <EditText
+                        android:id="@+id/etTargetWeekdayCalories"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/bg_input"
+                        android:hint="לדוגמה: 1800"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="14sp" />
+
+                    <!-- Shabbat Calorie Extra Target -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="תוספת קלוריות לשבת (בונוס שבת):"
+                        android:textColor="#424242"
+                        android:textSize="13sp" />
+
+                    <EditText
+                        android:id="@+id/etTargetShabbatBonus"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/bg_input"
+                        android:hint="לדוגמה: 500"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="14sp" />
+
+                    <Button
+                        android:id="@+id/btnSaveSettings"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/btn_primary"
+                        android:text="שמור הגדרות"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- Information on Blood Types -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="מידע על סוגי הדם והתזונה"
+                        android:textColor="#212121"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:lineSpacingExtra="3dp"
+                        android:text="• סוג O (הצייד): מגיב מצוין לחלבונים רזים, בשר ודגים. מומלץ להפחית חיטה וקטניות מסוימות.\n• סוג A (המלקט/חקלאי): משגשג על תזונה צמחונית עשירה, ירקות, דגנים וסויה.\n• סוג B (הנווד): מערכת עיכול גמישה, מגיב מעולה למוצרי חלב איכותיים, כבש ודגים.\n• סוג AB (החידה): שילוב ייחודי של A ו-B, מגיב נפלא לטופו, דגים, ירוקים ומאכלי חלב קלים."
+                        android:textColor="#616161"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+</LinearLayout>
